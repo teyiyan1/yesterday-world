@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///Users/liuxiaoying/Downloads/design-system-v3_5.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设计系统 v3.0 | 昨日的世界 · 杂志画报风</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================================
+       DESIGN SYSTEM v3.0 - 杂志画报风 (Magazine Editorial Style)
+       昨日的世界 | The World of Yesterday
+       ================================================================ */
+
+    :root {
+      /* ========================================
+         COLOR TOKENS
+         ======================================== */
+      
+      /* --- Background 背景色 --- */
+      --bg-canvas: #F8F6F3;          /* 主画布：温暖的米白 */
+      --bg-surface: #FFFFFF;          /* 卡片/模块表面 */
+      --bg-warm: #FAF8F5;             /* 暖色区块背景 */
+      --bg-cream: #F5F2ED;            /* 奶油色背景 */
+      --bg-muted: #EDEAE5;            /* 柔和灰背景 */
+      --bg-inverse: #1A1A1A;          /* 深色背景 */
+      
+      /* --- Foreground 前景/文字色 --- */
+      --text-primary: #1A1A1A;        /* 主文字：近乎纯黑 */
+      --text-secondary: #4A4A4A;      /* 次要文字 */
+      --text-tertiary: #7A7A7A;       /* 辅助文字 */
+      --text-muted: #9A9A9A;          /* 弱化文字 */
+      --text-disabled: #BEBEBE;       /* 禁用文字 */
+      --text-inverse: #FFFFFF;        /* 反色文字 */
+      
+      /* --- Accent 强调色 --- */
+      --accent-gold: #C9A962;         /* 金色：主强调 */
+      --accent-gold-dark: #A68B4B;    /* 金色深 */
+      --accent-gold-light: #E8DCC8;   /* 金色浅 */
+      --accent-gold-subtle: #F5F0E5;  /* 金色极浅 */
+      
+      /* --- Semantic 语义色 --- */
+      --color-blue: #4A6FA5;          /* 蓝色：链接/交互 */
+      --color-blue-light: #E8EEF5;
+      --color-burgundy: #8B3A3A;      /* 酒红：重要标记 */
+      --color-burgundy-light: #F5E8E8;
+      --color-sage: #5A7A5A;          /* 灰绿：成功/正向 */
+      --color-sage-light: #E8F0E8;
+      
+      /* --- Border 边框色 --- */
+      --border-light: #E8E4DE;        /* 浅边框 */
+      --border-medium: #D8D4CE;       /* 中等边框 */
+      --border-strong: #C8C4BE;       /* 深边框 */
+      --border-focus: var(--accent-gold);
+      
+      /* ========================================
+         TYPOGRAPHY TOKENS
+         ======================================== */
+      
+      /* --- Font Family 字体栈 --- */
+      --font-serif: 'Playfair Display', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      
+      /* --- Font Size 字号（偶数） --- */
+      --text-10: 10px;
+      --text-12: 12px;
+      --text-14: 14px;
+      --text-16: 16px;
+      --text-18: 18px;
+      --text-20: 20px;
+      --text-24: 24px;
+      --text-28: 28px;
+      --text-32: 32px;
+      --text-40: 40px;
+      --text-48: 48px;
+      --text-56: 56px;
+      --text-64: 64px;
+      
+      /* --- Font Weight 字重 --- */
+      --font-light: 300;
+      --font-regular: 400;
+      --font-medium: 500;
+      --font-semibold: 600;
+      --font-bold: 700;
+      
+      /* --- Line Height 行高 --- */
+      --leading-none: 1;
+      --leading-tight: 1.2;
+      --leading-snug: 1.4;
+      --leading-normal: 1.6;
+      --leading-relaxed: 1.8;
+      --leading-loose: 2;
+      
+      /* --- Letter Spacing 字间距 --- */
+      --tracking-tighter: -0.03em;
+      --tracking-tight: -0.02em;
+      --tracking-normal: 0;
+      --tracking-wide: 0.02em;
+      --tracking-wider: 0.06em;
+      --tracking-widest: 0.12em;
+      
+      /* ========================================
+         SPACING TOKENS
+         ======================================== */
+      --space-0: 0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+      
+      /* ========================================
+         BORDER RADIUS TOKENS
+         ======================================== */
+      --radius-none: 0;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 12px;
+      --radius-2xl: 16px;
+      --radius-full: 9999px;
+      
+      /* ========================================
+         SHADOW TOKENS
+         ======================================== */
+      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.02);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.02);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.10), 0 8px 16px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.12);
+      
+      /* ========================================
+         TRANSITION TOKENS
+         ======================================== */
+      --duration-fast: 100ms;
+      --duration-normal: 200ms;
+      --duration-slow: 300ms;
+      --duration-slower: 400ms;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* ========================================
+         LAYOUT TOKENS
+         ======================================== */
+      --max-width-prose: 680px;
+      --max-width-content: 960px;
+      --max-width-wide: 1200px;
+      --max-width-full: 1400px;
+    }
+
+    /* ================================================================
+       BASE STYLES
+       ================================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-14);
+      line-height: var(--leading-normal);
+      color: var(--text-primary);
+      background: var(--bg-canvas);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ================================================================
+       ICON SYSTEM - Google Material Symbols Rounded
+       ================================================================ */
+    .material-symbols-rounded {
+      font-family: 'Material Symbols Rounded';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      
+      /* 默认配置 */
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+
+    /* Icon 尺寸变体 */
+    .icon-sm {
+      font-size: 18px;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    
+    .icon-md {
+      font-size: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    .icon-lg {
+      font-size: 32px;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 40;
+    }
+    
+    .icon-xl {
+      font-size: 48px;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+
+    /* Icon 填充变体 */
+    .icon-filled {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ================================================================
+       TYPOGRAPHY COMPONENTS
+       ================================================================ */
+    
+    /* --- Display 展示标题（用于 Hero） --- */
+    .display-1 {
+      font-family: var(--font-serif);
+      font-size: var(--text-64);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .display-2 {
+      font-family: var(--font-serif);
+      font-size: var(--text-56);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .display-3 {
+      font-family: var(--font-serif);
+      font-size: var(--text-48);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    /* --- Heading 标题 --- */
+    .heading-1 {
+      font-family: var(--font-serif);
+      font-size: var(--text-40);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .heading-2 {
+      font-family: var(--font-serif);
+      font-size: var(--text-32);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-snug);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .heading-3 {
+      font-family: var(--font-serif);
+      font-size: var(--text-28);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-snug);
+    }
+
+    .heading-4 {
+      font-family: var(--font-serif);
+      font-size: var(--text-24);
+      font-weight: var(--font-medium);
+      line-height: var(--leading-snug);
+    }
+
+    .heading-5 {
+      font-family: var(--font-sans);
+      font-size: var(--text-20);
+      font-weight: var(--font-semibold);
+      line-height: var(--leading-snug);
+    }
+
+    .heading-6 {
+      font-family: var(--font-sans);
+      font-size: var(--text-18);
+      font-weight: var(--font-semibold);
+      line-height: var(--leading-snug);
+    }
+
+    /* --- Body 正文 --- */
+    .body-lg {
+      font-size: var(--text-18);
+      line-height: var(--leading-relaxed);
+    }
+
+    .body-md {
+      font-size: var(--text-16);
+      line-height: var(--leading-relaxed);
+    }
+
+    .body-sm {
+      font-size: var(--text-14);
+      line-height: var(--leading-normal);
+    }
+
+    /* --- Caption 说明文字 --- */
+    .caption {
+      font-size: var(--text-12);
+      line-height: var(--leading-normal);
+      color: var(--text-tertiary);
+    }
+
+    .caption-sm {
+      font-size: var(--text-10);
+      line-height: var(--leading-normal);
+      color: var(--text-muted);
+    }
+
+    /* --- Eyebrow 眉题 --- */
+    .eyebrow {
+      font-size: var(--text-12);
+      font-weight: var(--font-medium);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-widest);
+      color: var(--accent-gold);
+    }
+
+    /* --- Subtitle 副标题（英文/斜体） --- */
+    .subtitle {
+      font-family: var(--font-serif);
+      font-size: var(--text-20);
+      font-weight: var(--font-regular);
+      font-style: italic;
+      color: var(--text-tertiary);
+    }
+
+    /* --- Blockquote 引用 --- */
+    .blockquote {
+      font-family: var(--font-serif);
+      font-size: var(--text-24);
+      font-weight: var(--font-regular);
+      font-style: italic;
+      line-height: var(--leading-relaxed);
+      color: var(--text-secondary);
+      padding-left: var(--space-6);
+      position: relative;
+    }
+
+    .blockquote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    /* --- Section Number 章节编号 --- */
+    .section-number {
+      font-family: var(--font-serif);
+      font-size: var(--text-14);
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    /* ================================================================
+       DESIGN SYSTEM DOCUMENTATION STYLES
+       ================================================================ */
+    .ds-container {
+      max-width: var(--max-width-full);
+      margin: 0 auto;
+      padding: var(--space-12);
+    }
+
+    .ds-header {
+      text-align: center;
+      padding: var(--space-16) 0;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: var(--space-16);
+    }
+
+    .ds-header-eyebrow {
+      font-size: var(--text-12);
+      font-weight: var(--font-medium);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-widest);
+      color: var(--accent-gold);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-header-title {
+      font-family: var(--font-serif);
+      font-size: var(--text-48);
+      font-weight: var(--font-medium);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-header-subtitle {
+      font-family: var(--font-serif);
+      font-size: var(--text-20);
+      font-style: italic;
+      color: var(--text-tertiary);
+    }
+
+    .ds-section {
+      margin-bottom: var(--space-16);
+    }
+
+    .ds-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .ds-section-number {
+      font-family: var(--font-serif);
+      font-size: var(--text-14);
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .ds-section-title {
+      font-family: var(--font-serif);
+      font-size: var(--text-28);
+      font-weight: var(--font-medium);
+    }
+
+    .ds-subsection {
+      margin-bottom: var(--space-10);
+    }
+
+    .ds-subsection-title {
+      font-size: var(--text-14);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .ds-grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+    /* ================================================================
+       COLOR SWATCHES
+       ================================================================ */
+    .color-swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+
+    .color-swatch-preview {
+      height: 80px;
+    }
+
+    .color-swatch-info {
+      padding: var(--space-3);
+      background: var(--bg-surface);
+    }
+
+    .color-swatch-name {
+      font-size: var(--text-12);
+      font-weight: var(--font-medium);
+      margin-bottom: 2px;
+    }
+
+    .color-swatch-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-10);
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
+       TYPOGRAPHY SPECIMENS
+       ================================================================ */
+    .type-specimen {
+      padding: var(--space-6);
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      margin-bottom: var(--space-4);
+    }
+
+    .type-specimen-meta {
+      display: flex;
+      gap: var(--space-4);
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .type-specimen-tag {
+      font-family: var(--font-mono);
+      font-size: var(--text-10);
+      color: var(--text-muted);
+      background: var(--bg-muted);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ================================================================
+       BUTTON COMPONENTS
+       ================================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-family: var(--font-sans);
+      font-size: var(--text-14);
+      font-weight: var(--font-medium);
+      line-height: 1;
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-sm);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .btn .material-symbols-rounded {
+      font-size: 18px;
+    }
+
+    /* Primary: 金色填充 */
+    .btn-primary {
+      background: var(--accent-gold);
+      color: var(--text-inverse);
+      border-color: var(--accent-gold);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-gold-dark);
+      border-color: var(--accent-gold-dark);
+    }
+
+    /* Secondary: 透明 + 金色边框 */
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-gold-subtle);
+    }
+
+    /* Tertiary: 浅灰填充 */
+    .btn-tertiary {
+      background: var(--bg-muted);
+      color: var(--text-primary);
+    }
+
+    .btn-tertiary:hover {
+      background: var(--border-light);
+    }
+
+    /* Ghost: 纯文字 */
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-muted);
+      color: var(--text-primary);
+    }
+
+    /* Sizes */
+    .btn-sm {
+      font-size: var(--text-12);
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .btn-lg {
+      font-size: var(--text-16);
+      padding: var(--space-4) var(--space-6);
+    }
+
+    /* Icon Only */
+    .btn-icon {
+      padding: var(--space-2);
+    }
+
+    /* ================================================================
+       TAG COMPONENTS
+       ================================================================ */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-12);
+      font-weight: var(--font-medium);
+      line-height: 1;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: var(--bg-muted);
+      color: var(--text-secondary);
+    }
+
+    .tag .material-symbols-rounded {
+      font-size: 14px;
+    }
+
+    /* Tag Variants */
+    .tag-gold {
+      background: var(--accent-gold-light);
+      color: var(--accent-gold-dark);
+    }
+
+    .tag-blue {
+      background: var(--color-blue-light);
+      color: var(--color-blue);
+    }
+
+    .tag-burgundy {
+      background: var(--color-burgundy-light);
+      color: var(--color-burgundy);
+    }
+
+    .tag-sage {
+      background: var(--color-sage-light);
+      color: var(--color-sage);
+    }
+
+    /* Semantic Tags */
+    .tag-person {
+      background: #E8F4FD;
+      color: #0D5DB8;
+    }
+
+    .tag-place {
+      background: #E6F7ED;
+      color: #1B7340;
+    }
+
+    .tag-theme {
+      background: #FFF4E5;
+      color: #B85C00;
+    }
+
+    .tag-time {
+      background: #F3E8FF;
+      color: #7C3AED;
+    }
+
+    /* ================================================================
+       CARD COMPONENTS
+       ================================================================ */
+    
+    /* Base Card */
+    .card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+
+    .card-interactive {
+      cursor: pointer;
+    }
+
+    .card-interactive:hover {
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-body {
+      padding: var(--space-6);
+    }
+
+    /* Person Card - 人物卡片（杂志风） */
+    .person-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
+      cursor: pointer;
+    }
+
+    .person-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .person-card-image {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .person-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(1.05);
+      transition: all var(--duration-slow) var(--ease-out);
+    }
+
+    .person-card:hover .person-card-image img {
+      filter: grayscale(0%) contrast(1);
+      transform: scale(1.03);
+    }
+
+    .person-card-content {
+      padding: var(--space-5);
+    }
+
+    .person-card-eyebrow {
+      font-size: var(--text-10);
+      font-weight: var(--font-medium);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-widest);
+      color: var(--accent-gold);
+      margin-bottom: var(--space-2);
+    }
+
+    .person-card-name {
+      font-family: var(--font-serif);
+      font-size: var(--text-20);
+      font-weight: var(--font-medium);
+      margin-bottom: var(--space-1);
+    }
+
+    .person-card-name-en {
+      font-family: var(--font-serif);
+      font-size: var(--text-14);
+      font-style: italic;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-3);
+    }
+
+    .person-card-meta {
+      font-size: var(--text-12);
+      color: var(--text-muted);
+    }
+
+    /* Quote Card - 引用卡片 */
+    .quote-card {
+      background: var(--bg-warm);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: '"';
+      position: absolute;
+      top: var(--space-4);
+      left: var(--space-6);
+      font-family: var(--font-serif);
+      font-size: 64px;
+      color: var(--accent-gold-light);
+      line-height: 1;
+    }
+
+    .quote-card-text {
+      font-family: var(--font-serif);
+      font-size: var(--text-18);
+      font-style: italic;
+      line-height: var(--leading-relaxed);
+      color: var(--text-secondary);
+      padding-left: var(--space-12);
+    }
+
+    .quote-card-source {
+      margin-top: var(--space-4);
+      padding-left: var(--space-12);
+      font-size: var(--text-12);
+      color: var(--text-muted);
+    }
+
+    /* Timeline Card - 时间线卡片 */
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: var(--space-8);
+      padding: var(--space-8);
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+
+    .timeline-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .timeline-card-year {
+      font-family: var(--font-serif);
+      font-size: var(--text-32);
+      font-weight: var(--font-medium);
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .timeline-card-title {
+      font-size: var(--text-18);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--space-3);
+    }
+
+    .timeline-card-desc {
+      font-size: var(--text-14);
+      line-height: var(--leading-relaxed);
+      color: var(--text-secondary);
+    }
+
+    .timeline-card-source {
+      margin-top: var(--space-3);
+      font-size: var(--text-12);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
+       FORM COMPONENTS
+       ================================================================ */
+    .input {
+      width: 100%;
+      font-family: var(--font-sans);
+      font-size: var(--text-14);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-medium);
+      border-radius: var(--radius-sm);
+      transition: all var(--duration-fast) var(--ease-out);
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px var(--accent-gold-subtle);
+    }
+
+    .input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
+       NAVIGATION COMPONENTS
+       ================================================================ */
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-14);
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color var(--duration-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link .material-symbols-rounded {
+      font-size: 20px;
+    }
+
+    /* Back Link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-14);
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color var(--duration-fast);
+    }
+
+    .back-link:hover {
+      color: var(--text-primary);
+    }
+
+    /* ================================================================
+       SECTION COMPONENTS
+       ================================================================ */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+
+    .section-header-number {
+      font-family: var(--font-serif);
+      font-size: var(--text-14);
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .section-header-title {
+      font-family: var(--font-serif);
+      font-size: var(--text-28);
+      font-weight: var(--font-medium);
+    }
+
+    .section-header-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+      margin-left: var(--space-6);
+    }
+
+    /* ================================================================
+       AVATAR COMPONENTS
+       ================================================================ */
+    .avatar {
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      background: var(--bg-cream);
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-sm { width: 32px; height: 32px; }
+    .avatar-md { width: 48px; height: 48px; }
+    .avatar-lg { width: 64px; height: 64px; }
+    .avatar-xl { width: 80px; height: 80px; }
+
+    .avatar-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      color: var(--text-tertiary);
+    }
+
+    .avatar-sm.avatar-placeholder { font-size: var(--text-14); }
+    .avatar-md.avatar-placeholder { font-size: var(--text-18); }
+    .avatar-lg.avatar-placeholder { font-size: var(--text-24); }
+    .avatar-xl.avatar-placeholder { font-size: var(--text-28); }
+
+    /* ================================================================
+       ICON SHOWCASE
+       ================================================================ */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4);
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+    }
+
+    .icon-item .material-symbols-rounded {
+      font-size: 28px;
+      color: var(--text-secondary);
+    }
+
+    .icon-item span:last-child {
+      font-size: var(--text-10);
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ================================================================
+       UTILITY CLASSES
+       ================================================================ */
+    .text-primary { color: var(--text-primary); }
+    .text-secondary { color: var(--text-secondary); }
+    .text-tertiary { color: var(--text-tertiary); }
+    .text-muted { color: var(--text-muted); }
+    .text-gold { color: var(--accent-gold); }
+
+    .bg-canvas { background: var(--bg-canvas); }
+    .bg-surface { background: var(--bg-surface); }
+    .bg-warm { background: var(--bg-warm); }
+    .bg-cream { background: var(--bg-cream); }
+
+    .font-serif { font-family: var(--font-serif); }
+    .font-sans { font-family: var(--font-sans); }
+    .font-mono { font-family: var(--font-mono); }
+
+    .italic { font-style: italic; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wide { letter-spacing: var(--tracking-wider); }
+
+    /* ================================================================
+       RESPONSIVE
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .ds-grid-5, .ds-grid-6 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ds-container {
+        padding: var(--space-6);
+      }
+      
+      .ds-header-title {
+        font-size: var(--text-32);
+      }
+      
+      .ds-grid-2, .ds-grid-3, .ds-grid-4, .ds-grid-5, .ds-grid-6 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .timeline-card {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ds-container">
+    <!-- Header -->
+    <header class="ds-header">
+      <p class="ds-header-eyebrow">Design System v3.0</p>
+      <h1 class="ds-header-title">昨日的世界</h1>
+      <p class="ds-header-subtitle">杂志画报风 · Magazine Editorial Style</p>
+    </header>
+
+    <!-- 01. Colors -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">01</span>
+        <h2 class="ds-section-title">Colors 色彩</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Background 背景色</h3>
+        <div class="ds-grid ds-grid-6">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-canvas);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Canvas</p>
+              <p class="color-swatch-value">#F8F6F3</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-surface);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Surface</p>
+              <p class="color-swatch-value">#FFFFFF</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-warm);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Warm</p>
+              <p class="color-swatch-value">#FAF8F5</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-cream);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Cream</p>
+              <p class="color-swatch-value">#F5F2ED</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-muted);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Muted</p>
+              <p class="color-swatch-value">#EDEAE5</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--bg-inverse);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Inverse</p>
+              <p class="color-swatch-value">#1A1A1A</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Foreground 文字色</h3>
+        <div class="ds-grid ds-grid-5">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--text-primary);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Primary</p>
+              <p class="color-swatch-value">#1A1A1A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--text-secondary);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Secondary</p>
+              <p class="color-swatch-value">#4A4A4A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--text-tertiary);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Tertiary</p>
+              <p class="color-swatch-value">#7A7A7A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--text-muted);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Muted</p>
+              <p class="color-swatch-value">#9A9A9A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--text-disabled);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Disabled</p>
+              <p class="color-swatch-value">#BEBEBE</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Accent 强调色</h3>
+        <div class="ds-grid ds-grid-4">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--accent-gold);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Gold</p>
+              <p class="color-swatch-value">#C9A962</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--accent-gold-dark);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Gold Dark</p>
+              <p class="color-swatch-value">#A68B4B</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--accent-gold-light);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Gold Light</p>
+              <p class="color-swatch-value">#E8DCC8</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--accent-gold-subtle);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Gold Subtle</p>
+              <p class="color-swatch-value">#F5F0E5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Semantic 语义色</h3>
+        <div class="ds-grid ds-grid-6">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-blue);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Blue</p>
+              <p class="color-swatch-value">#4A6FA5</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-blue-light);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Blue Light</p>
+              <p class="color-swatch-value">#E8EEF5</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-burgundy);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Burgundy</p>
+              <p class="color-swatch-value">#8B3A3A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-burgundy-light);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Burgundy Light</p>
+              <p class="color-swatch-value">#F5E8E8</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-sage);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Sage</p>
+              <p class="color-swatch-value">#5A7A5A</p>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background: var(--color-sage-light);"></div>
+            <div class="color-swatch-info">
+              <p class="color-swatch-name">Sage Light</p>
+              <p class="color-swatch-value">#E8F0E8</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. Typography -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">02</span>
+        <h2 class="ds-section-title">Typography 字体</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Font Families 字体栈</h3>
+        <div class="type-specimen">
+          <p style="font-family: var(--font-serif); font-size: 24px;">Playfair Display + Noto Serif SC</p>
+          <p style="font-family: var(--font-serif); font-size: 18px; margin-top: 8px;">用于标题、引用、装饰性文字 · ABCDEfghij 昨日的世界</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">--font-serif</span>
+          </div>
+        </div>
+        <div class="type-specimen">
+          <p style="font-family: var(--font-sans); font-size: 24px;">Inter + Noto Sans SC</p>
+          <p style="font-family: var(--font-sans); font-size: 18px; margin-top: 8px;">用于正文、界面元素 · ABCDEfghij 昨日的世界</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">--font-sans</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Display 展示标题</h3>
+        <div class="type-specimen">
+          <p class="display-3">昨日的世界</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.display-3</span>
+            <span class="type-specimen-tag">48px</span>
+            <span class="type-specimen-tag">Serif</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Headings 标题</h3>
+        <div class="type-specimen">
+          <p class="heading-2">霍夫曼斯塔尔</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.heading-2</span>
+            <span class="type-specimen-tag">32px</span>
+          </div>
+        </div>
+        <div class="type-specimen">
+          <p class="heading-4">与茨威格的交集</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.heading-4</span>
+            <span class="type-specimen-tag">24px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Special Styles 特殊样式</h3>
+        <div class="type-specimen">
+          <p class="eyebrow">诗人 · 剧作家</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.eyebrow</span>
+            <span class="type-specimen-tag">12px uppercase</span>
+            <span class="type-specimen-tag">Gold</span>
+          </div>
+        </div>
+        <div class="type-specimen">
+          <p class="subtitle">Hugo von Hofmannsthal</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.subtitle</span>
+            <span class="type-specimen-tag">20px italic</span>
+            <span class="type-specimen-tag">Serif</span>
+          </div>
+        </div>
+        <div class="type-specimen">
+          <p class="section-number">01</p>
+          <div class="type-specimen-meta">
+            <span class="type-specimen-tag">.section-number</span>
+            <span class="type-specimen-tag">14px italic</span>
+            <span class="type-specimen-tag">Gold</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. Icons -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">03</span>
+        <h2 class="ds-section-title">Icons 图标</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Google Material Symbols Rounded</h3>
+        <p class="body-sm text-secondary" style="margin-bottom: 16px;">使用可变字体，支持 FILL、wght、GRAD、opsz 四个轴的调节</p>
+        
+        <div class="icon-grid">
+          <div class="icon-item">
+            <span class="material-symbols-rounded">arrow_back</span>
+            <span>arrow_back</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">arrow_forward</span>
+            <span>arrow_forward</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">search</span>
+            <span>search</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">close</span>
+            <span>close</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">menu</span>
+            <span>menu</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">share</span>
+            <span>share</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">bookmark</span>
+            <span>bookmark</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded icon-filled">bookmark</span>
+            <span>bookmark filled</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">timeline</span>
+            <span>timeline</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">group</span>
+            <span>group</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">person</span>
+            <span>person</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">format_quote</span>
+            <span>format_quote</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">edit_note</span>
+            <span>edit_note</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">article</span>
+            <span>article</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">location_on</span>
+            <span>location_on</span>
+          </div>
+          <div class="icon-item">
+            <span class="material-symbols-rounded">calendar_month</span>
+            <span>calendar_month</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Icon Sizes 尺寸</h3>
+        <div style="display: flex; align-items: center; gap: 32px; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <div style="text-align: center;">
+            <span class="material-symbols-rounded icon-sm">bookmark</span>
+            <p class="caption" style="margin-top: 8px;">.icon-sm · 18px</p>
+          </div>
+          <div style="text-align: center;">
+            <span class="material-symbols-rounded icon-md">bookmark</span>
+            <p class="caption" style="margin-top: 8px;">.icon-md · 24px</p>
+          </div>
+          <div style="text-align: center;">
+            <span class="material-symbols-rounded icon-lg">bookmark</span>
+            <p class="caption" style="margin-top: 8px;">.icon-lg · 32px</p>
+          </div>
+          <div style="text-align: center;">
+            <span class="material-symbols-rounded icon-xl">bookmark</span>
+            <p class="caption" style="margin-top: 8px;">.icon-xl · 48px</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. Buttons -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">04</span>
+        <h2 class="ds-section-title">Buttons 按钮</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Variants 变体</h3>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-tertiary">Tertiary</button>
+          <button class="btn btn-ghost">Ghost</button>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">With Icons 带图标</h3>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <button class="btn btn-primary">
+            <span class="material-symbols-rounded">bookmark</span>
+            收藏
+          </button>
+          <button class="btn btn-secondary">
+            <span class="material-symbols-rounded">share</span>
+            分享
+          </button>
+          <button class="btn btn-ghost btn-icon">
+            <span class="material-symbols-rounded">arrow_back</span>
+          </button>
+          <button class="btn btn-ghost btn-icon">
+            <span class="material-symbols-rounded">search</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Sizes 尺寸</h3>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. Tags -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">05</span>
+        <h2 class="ds-section-title">Tags 标签</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Variants 变体</h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <span class="tag">Default</span>
+          <span class="tag tag-gold">Gold</span>
+          <span class="tag tag-blue">Blue</span>
+          <span class="tag tag-burgundy">Burgundy</span>
+          <span class="tag tag-sage">Sage</span>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Semantic Tags 语义标签</h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <span class="tag tag-person">
+            <span class="material-symbols-rounded">person</span>
+            霍夫曼斯塔尔
+          </span>
+          <span class="tag tag-place">
+            <span class="material-symbols-rounded">location_on</span>
+            维也纳
+          </span>
+          <span class="tag tag-theme">文化</span>
+          <span class="tag tag-time">1896</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. Cards -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">06</span>
+        <h2 class="ds-section-title">Cards 卡片</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Person Card 人物卡片</h3>
+        <div class="ds-grid ds-grid-4">
+          <div class="person-card">
+            <div class="person-card-image">
+              <img src="images/people/hofmannsthal.jpg" alt="Hofmannsthal">
+            </div>
+            <div class="person-card-content">
+              <p class="person-card-eyebrow">诗人 · 剧作家</p>
+              <h3 class="person-card-name">霍夫曼斯塔尔</h3>
+              <p class="person-card-name-en">Hugo von Hofmannsthal</p>
+              <p class="person-card-meta">1874 — 1929</p>
+            </div>
+          </div>
+          <div class="person-card">
+            <div class="person-card-image">
+              <img src="images/people/rilke.jpg" alt="Rilke">
+            </div>
+            <div class="person-card-content">
+              <p class="person-card-eyebrow">诗人</p>
+              <h3 class="person-card-name">里尔克</h3>
+              <p class="person-card-name-en">Rainer Maria Rilke</p>
+              <p class="person-card-meta">1875 — 1926</p>
+            </div>
+          </div>
+          <div class="person-card">
+            <div class="person-card-image">
+              <img src="images/people/rodin.jpg" alt="Rodin">
+            </div>
+            <div class="person-card-content">
+              <p class="person-card-eyebrow">雕塑家</p>
+              <h3 class="person-card-name">罗丹</h3>
+              <p class="person-card-name-en">Auguste Rodin</p>
+              <p class="person-card-meta">1840 — 1917</p>
+            </div>
+          </div>
+          <div class="person-card">
+            <div class="person-card-image">
+              <img src="images/people/freud.jpg" alt="Freud">
+            </div>
+            <div class="person-card-content">
+              <p class="person-card-eyebrow">精神分析学家</p>
+              <h3 class="person-card-name">弗洛伊德</h3>
+              <p class="person-card-name-en">Sigmund Freud</p>
+              <p class="person-card-meta">1856 — 1939</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Quote Card 引用卡片</h3>
+        <div class="quote-card">
+          <p class="quote-card-text">一个中学生竟会创造出这样美的艺术，有这样的远见，思想这么深刻。他的存在本身就清楚地表明，在我们这个时代同样可以产生诗人。</p>
+          <p class="quote-card-source">——《昨日的世界·上世纪的学校》</p>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Timeline Card 时间线卡片</h3>
+        <div class="timeline-card">
+          <div class="timeline-card-year">1896</div>
+          <div>
+            <h4 class="timeline-card-title">第一次"相遇"——在咖啡馆听闻其名</h4>
+            <p class="timeline-card-desc">茨威格在中学时代，便在维也纳的咖啡馆里听到文学圈热议一个16岁的天才诗人。当时没有人相信，一个还穿着中学校服的少年，能写出如此深刻、如此完美的诗句。</p>
+            <p class="timeline-card-source">——《昨日的世界·上世纪的学校》</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. Section Header -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">07</span>
+        <h2 class="ds-section-title">Section Header 章节头</h2>
+      </div>
+
+      <div style="padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+        <div class="section-header">
+          <span class="section-header-number">01</span>
+          <h2 class="section-header-title">与茨威格的交集</h2>
+          <div class="section-header-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08. Avatar -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">08</span>
+        <h2 class="ds-section-title">Avatar 头像</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Sizes 尺寸</h3>
+        <div style="display: flex; gap: 24px; align-items: center; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <div style="text-align: center;">
+            <div class="avatar avatar-sm">
+              <img src="avatar/image 1.png" alt="">
+            </div>
+            <p class="caption" style="margin-top: 8px;">SM · 32px</p>
+          </div>
+          <div style="text-align: center;">
+            <div class="avatar avatar-md">
+              <img src="avatar/image 1.png" alt="">
+            </div>
+            <p class="caption" style="margin-top: 8px;">MD · 48px</p>
+          </div>
+          <div style="text-align: center;">
+            <div class="avatar avatar-lg">
+              <img src="avatar/image 1.png" alt="">
+            </div>
+            <p class="caption" style="margin-top: 8px;">LG · 64px</p>
+          </div>
+          <div style="text-align: center;">
+            <div class="avatar avatar-xl">
+              <img src="avatar/image 1.png" alt="">
+            </div>
+            <p class="caption" style="margin-top: 8px;">XL · 80px</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Placeholder 占位</h3>
+        <div style="display: flex; gap: 24px; align-items: center; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <div class="avatar avatar-md avatar-placeholder">霍</div>
+          <div class="avatar avatar-lg avatar-placeholder">里</div>
+          <div class="avatar avatar-xl avatar-placeholder">罗</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09. Navigation -->
+    <section class="ds-section">
+      <div class="ds-section-header">
+        <span class="ds-section-number">09</span>
+        <h2 class="ds-section-title">Navigation 导航</h2>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Nav Links 导航链接</h3>
+        <div style="display: flex; gap: 32px; padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <a href="file:///Users/liuxiaoying/Downloads/design-system-v3_5.html#" class="nav-link">时间轴</a>
+          <a href="file:///Users/liuxiaoying/Downloads/design-system-v3_5.html#" class="nav-link active">人物图谱</a>
+          <a href="file:///Users/liuxiaoying/Downloads/design-system-v3_5.html#" class="nav-link">金句摘录</a>
+          <a href="file:///Users/liuxiaoying/Downloads/design-system-v3_5.html#" class="nav-link">我的想法</a>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3 class="ds-subsection-title">Back Link 返回链接</h3>
+        <div style="padding: 24px; background: var(--bg-surface); border-radius: 8px; border: 1px solid var(--border-light);">
+          <a href="file:///Users/liuxiaoying/Downloads/design-system-v3_5.html#" class="back-link">
+            <span class="material-symbols-rounded icon-sm">arrow_back</span>
+            返回
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+</body></html>
