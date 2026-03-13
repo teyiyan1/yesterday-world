@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人物图谱 | 昨日的世界</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #000000;
+      --bg-surface: #1A1A1A;
+      --bg-warm: #1F1F1F;
+      --bg-cream: #252525;
+      
+      --text-primary: #FFFFFF;
+      --text-secondary: #CCCCCC;
+      --text-tertiary: #AAAAAA;
+      --text-muted: #888888;
+      
+      --accent-gold: #FF6B6B;
+      --accent-gold-light: #FF8A80;
+      --accent-blue: #4A6FA5;
+      --accent-burgundy: #8B3A3A;
+      
+      --border-light: #333333;
+      --border-medium: #444444;
+      
+      --font-serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+      
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* 页面翻书动画初始状态 */
+    body.page-loading {
+      perspective: 2000px;
+      perspective-origin: center center;
+      overflow-x: hidden;
+    }
+
+    body.page-loading .hero,
+    body.page-loading .encounters,
+    body.page-loading .works,
+    body.page-loading .book-quotes,
+    body.page-loading .people-nav {
+      transform: rotateY(-20deg) translateX(50px);
+      opacity: 0;
+      transform-origin: right center;
+      transform-style: preserve-3d;
+    }
+
+    body.page-loading .hero-image img {
+      transform: rotateY(-20deg);
+      transform-origin: right center;
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ========================================
+       HEADER
+       ======================================== */
+    .header {
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-surface);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: var(--text-primary);
+      transform: translateX(-2px);
+    }
+
+    .header-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: grayscale(20%) contrast(1.05);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .hero-image-caption {
+      position: absolute;
+      bottom: -24px;
+      left: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .hero-content {
+      max-width: 520px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: 56px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero-name-en {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-tertiary);
+      margin-bottom: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .hero-quote {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .hero-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* ========================================
+       SECTION
+       ======================================== */
+    .section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 64px 48px 0;
+      background: transparent;
+      border-radius: 12px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .section-number {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-light);
+      margin-left: 24px;
+    }
+
+    /* ========================================
+       TIMELINE (与茨威格的交集)
+       ======================================== */
+    .encounters {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .encounter-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 32px;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .encounter-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px) saturate(200%);
+      -webkit-backdrop-filter: blur(15px) saturate(200%);
+    }
+
+    .encounter-year {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .encounter-content h4 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .encounter-content p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .encounter-source {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ========================================
+       WORKS
+       ======================================== */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .work-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .work-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px) saturate(200%);
+      -webkit-backdrop-filter: blur(15px) saturate(200%);
+    }
+
+    .work-year {
+      font-size: 12px;
+      color: var(--accent-gold);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .work-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .work-type {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .work-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ========================================
+       QUOTES FROM BOOK
+       ======================================== */
+    .book-quotes {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .book-quote-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 24px 32px 24px 24px;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .book-quote-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .book-quote-card::before {
+      content: '';
+      display: none;
+    }
+
+    .book-quote-icon {
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      font-size: 36px;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .book-quote-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      padding-left: 48px;
+      font-style: italic;
+    }
+
+    .book-quote-source {
+      margin-top: 16px;
+      padding-left: 48px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+
+    /* ========================================
+       PEOPLE GRID (小卡片导航)
+       ======================================== */
+    .people-nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: transparent;
+      padding: 48px;
+    }
+
+    .people-nav-header {
+      max-width: 1400px;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .people-nav-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .people-nav-link {
+      font-size: 14px;
+      color: var(--accent-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .people-nav-link:hover {
+      color: var(--accent-gold-light);
+      transform: translateX(2px);
+      gap: 6px;
+    }
+
+    .people-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .person-mini-card {
+      background: var(--bg-surface);
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      border-width: 0;
+      border-color: rgba(0, 0, 0, 0);
+      border-style: none;
+      border-image: none;
+    }
+
+    .person-mini-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .person-mini-card.active {
+      border-width: 1px;
+      border-color: rgba(255, 255, 255, 0.3);
+      border-style: solid;
+      border-image: none;
+    }
+
+    .person-mini-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      overflow: hidden;
+      background: var(--bg-cream);
+    }
+
+    .person-mini-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+    }
+
+    .person-mini-avatar.placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--text-tertiary);
+    }
+
+    .person-mini-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .person-mini-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px;
+      text-align: center;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 48px 24px;
+      }
+      
+      .hero-image {
+        order: -1;
+      }
+      
+      .hero-image img {
+        max-width: 100%;
+      }
+      
+      .hero-name {
+        font-size: 40px;
+      }
+      
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .people-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 16px 20px;
+      }
+      
+      .header-nav {
+        display: none;
+      }
+      
+      .section {
+        padding: 48px 20px;
+      }
+      
+      .people-nav {
+        padding: 48px 20px;
+      }
+      
+      .hero-quote {
+        font-size: 20px;
+      }
+      
+      .encounter-item {
+        grid-template-columns: fr;
+        gap: 16px;
+      }
+      
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .people-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html?view=people" class="back-btn">
+        <span class="material-symbols-rounded">arrow_back</span>
+      </a>
+      <span class="header-title">昨日的世界</span>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html#featuresNav" class="nav-link">时间轴</a>
+      <a href="#" class="nav-link active">人物图谱</a>
+      <a href="index.html#quotes" class="nav-link">金句摘录</a>
+      <a href="index.html#thoughts" class="nav-link">我的想法</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-image">
+      <img src="images/people/hofmannsthal.jpg" alt="Hugo von Hofmannsthal">
+      <span class="hero-image-caption">霍夫曼斯塔尔，摄于 1910 年</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">诗人 · 剧作家</div>
+      <h1 class="hero-name">霍夫曼斯塔尔</h1>
+      <p class="hero-name-en">Hugo von Hofmannsthal</p>
+      
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">生卒</span>
+          <span class="meta-value">1874 — 1929</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">出生地</span>
+          <span class="meta-value">奥地利 维也纳</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">身份</span>
+          <span class="meta-value">奥地利现代主义诗人</span>
+        </div>
+      </div>
+      
+      <blockquote class="hero-quote">
+        一个中学生竟会创造出这样美的艺术，有这样的远见，思想这么深刻。他的存在本身就清楚地表明，在我们这个时代同样可以产生诗人。
+      </blockquote>
+      
+      <p class="hero-desc">
+        霍夫曼斯塔尔是维也纳世纪末文学运动的核心人物，16 岁便以笔名"洛里斯"发表诗作，震惊文坛。他与作曲家理查德·施特劳斯长期合作，创作了《玫瑰骑士》《埃莱克特拉》等著名歌剧剧本。对年轻的茨威格而言，霍夫曼斯塔尔是一个近乎神话般的存在——证明了即使在物质主义盛行的时代，天才依然可以横空出世。
+      </p>
+    </div>
+  </section>
+
+  <!-- 与茨威格的交集 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">与茨威格的交集</h2>
+      <div class="section-line"></div>
+    </div>
+    
+    <div class="encounters">
+      <div class="encounter-item">
+        <div class="encounter-year">1896</div>
+        <div class="encounter-content">
+          <h4>第一次"相遇"——在咖啡馆听闻其名</h4>
+          <p>茨威格在中学时代，便在维也纳的咖啡馆里听到文学圈热议一个16岁的天才诗人。当时没有人相信，一个还穿着中学校服的少年，能写出如此深刻、如此完美的诗句。霍夫曼斯塔尔用笔名"洛里斯"发表作品，直到人们发现他的真实身份——一切都变成了一个传奇。</p>
+          <p class="encounter-source">——《昨日的世界·上世纪的学校》</p>
+        </div>
+      </div>
+      
+      <div class="encounter-item">
+        <div class="encounter-year">1900s</div>
+        <div class="encounter-content">
+          <h4>文学圈的相互认识</h4>
+          <p>进入维也纳大学后，茨威格逐渐融入文学圈，与霍夫曼斯塔尔有了直接接触。尽管两人年龄相近，但霍夫曼斯塔尔早已是成名人物，而茨威格还是一个初出茅庐的年轻作家。这种差距并未阻碍两人的交流，反而激励茨威格更加努力地追求艺术上的完美。</p>
+          <p class="encounter-source">——《昨日的世界·大学生活》</p>
+        </div>
+      </div>
+      
+      <div class="encounter-item">
+        <div class="encounter-year">1910s</div>
+        <div class="encounter-content">
+          <h4>共同见证维也纳文化的黄金时代</h4>
+          <p>两人同为维也纳文化黄金时代的亲历者与贡献者。霍夫曼斯塔尔与施特劳斯的歌剧合作，成为这个时代最重要的艺术成就之一；而茨威格则以小说和传记闻名欧洲。他们共同构成了那个已逝世界的文化图景。</p>
+          <p class="encounter-source">——《昨日的世界·欧洲的光彩》</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 代表作品 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">代表作品</h2>
+      <div class="section-line"></div>
+    </div>
+    
+    <div class="works-grid">
+      <div class="work-card">
+        <div class="work-year">1911</div>
+        <h3 class="work-title">玫瑰骑士</h3>
+        <p class="work-type">歌剧剧本 · 与理查德·施特劳斯合作</p>
+        <p class="work-desc">以 18 世纪维也纳为背景的喜歌剧，探讨爱情、时间与优雅地放手。被誉为 20 世纪最伟大的歌剧之一。</p>
+      </div>
+      
+      <div class="work-card">
+        <div class="work-year">1903</div>
+        <h3 class="work-title">钱德斯勋爵的信</h3>
+        <p class="work-type">散文</p>
+        <p class="work-desc">一封虚构的信件，探讨语言的局限性与表达的危机，被视为现代主义文学的奠基之作。</p>
+      </div>
+      
+      <div class="work-card">
+        <div class="work-year">1911</div>
+        <h3 class="work-title">每个人</h3>
+        <p class="work-type">戏剧</p>
+        <p class="work-desc">改编自中世纪道德剧，自 1920 年起成为萨尔茨堡音乐节的固定演出剧目，至今仍在上演。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 书中原文 -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">茨威格如是说</h2>
+      <div class="section-line"></div>
+    </div>
+    
+    <div class="book-quotes">
+      <div class="book-quote-card">
+        <span class="material-symbols-rounded book-quote-icon">format_quote</span>
+        <p class="book-quote-text">
+          我们一代的年轻人，面对一个这样的成就，怎能不感到既自豪又谦卑呢？一个十六岁的孩子，还穿着中学校服，竟能写出这样的东西！我们突然意识到，诗人并不只属于传说中的过去，而是可以生长在我们自己身边的。
+        </p>
+        <p class="book-quote-source">——《昨日的世界·上世纪的学校》</p>
+      </div>
+      
+      <div class="book-quote-card">
+        <span class="material-symbols-rounded book-quote-icon">format_quote</span>
+        <p class="book-quote-text">
+          一个出类拔萃的年轻人，他在自己的领域中获得成功，就永远鼓舞他周围的年轻人。对我们来说，霍夫曼斯塔尔的存在就是这样一种鼓舞——他证明了即使在这个平庸的时代，天才依然可能降临人间。
+        </p>
+        <p class="book-quote-source">——《昨日的世界·上世纪的学校》</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 其他人物导航 -->
+  <section class="people-nav">
+    <div class="people-nav-header">
+      <h3 class="people-nav-title">更多人物</h3>
+      <a href="#" class="people-nav-link">
+        查看全部
+        <span class="material-symbols-rounded" style="font-size: 18px;">arrow_forward</span>
+      </a>
+    </div>
+    
+    <div class="people-grid">
+      <div class="person-mini-card">
+        <div class="person-mini-avatar">
+          <img src="images/people/rilke.jpg" alt="Rilke">
+        </div>
+        <h4 class="person-mini-name">里尔克</h4>
+        <p class="person-mini-role">诗人</p>
+      </div>
+      
+      <div class="person-mini-card">
+        <div class="person-mini-avatar">
+          <img src="images/people/rodin.jpg" alt="Rodin">
+        </div>
+        <h4 class="person-mini-name">罗丹</h4>
+        <p class="person-mini-role">雕塑家</p>
+      </div>
+      
+      <div class="person-mini-card">
+        <div class="person-mini-avatar">
+          <img src="images/people/rolland.jpg" alt="Romain Rolland">
+        </div>
+        <h4 class="person-mini-name">罗曼·罗兰</h4>
+        <p class="person-mini-role">作家</p>
+      </div>
+      
+      <div class="person-mini-card">
+        <div class="person-mini-avatar">
+          <img src="images/people/freud.jpg" alt="Freud">
+        </div>
+        <h4 class="person-mini-name">弗洛伊德</h4>
+        <p class="person-mini-role">精神分析学家</p>
+      </div>
+      
+      <div class="person-mini-card">
+        <div class="person-mini-avatar">
+          <img src="images/people/herzl.jpg" alt="Herzl">
+        </div>
+        <h4 class="person-mini-name">赫茨尔</h4>
+        <p class="person-mini-role">犹太复国主义创始人</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">基于《昨日的世界》微信读书笔记整理 · 共 435 条划线</p>
+  </footer>
+
+  <script>
+    // 人物数据
+    const personData = {
+      '霍夫曼斯塔尔': {
+        name: '霍夫曼斯塔尔',
+        nameEn: 'Hugo von Hofmannsthal',
+        role: '诗人 · 剧作家',
+        roleEn: 'Poet · Playwright',
+        birth: '1874',
+        death: '1929',
+        birthplace: '奥地利 维也纳',
+        identity: '奥地利现代主义诗人',
+        avatar: '霍',
+        image: 'images/people/hofmannsthal.jpg',
+        imageCaption: '霍夫曼斯塔尔，摄于 1910 年',
+        quote: '一个中学生竟会创造出这样美的艺术，有这样的远见，思想这么深刻。他的存在本身就清楚地表明，在我们这个时代同样可以产生诗人。',
+        description: '霍夫曼斯塔尔是维也纳世纪末文学运动的核心人物，16 岁便以笔名"洛里斯"发表诗作，震惊文坛。他与作曲家理查德·施特劳斯长期合作，创作了《玫瑰骑士》《埃莱克特拉》等著名歌剧剧本。对年轻的茨威格而言，霍夫曼斯塔尔是一个近乎神话般的存在——证明了即使在物质主义盛行的时代，天才依然可以横空出世。',
+        encounters: [
+          {
+            year: '1896',
+            title: '第一次"相遇"——在咖啡馆听闻其名',
+            content: '茨威格在中学时代，便在维也纳的咖啡馆里听到文学圈热议一个16岁的天才诗人。当时没有人相信，一个还穿着中学校服的少年，能写出如此深刻、如此完美的诗句。霍夫曼斯塔尔用笔名"洛里斯"发表作品，直到人们发现他的真实身份——一切都变成了一个传奇。',
+            source: '——《昨日的世界·上世纪的学校》'
+          },
+          {
+            year: '1900s',
+            title: '文学圈的相互认识',
+            content: '进入维也纳大学后，茨威格逐渐融入文学圈，与霍夫曼斯塔尔有了直接接触。尽管两人年龄相近，但霍夫曼斯塔尔早已是成名人物，而茨威格还是一个初出茅庐的年轻作家。这种差距并未阻碍两人的交流，反而激励茨威格更加努力地追求艺术上的完美。',
+            source: '——《昨日的世界·大学生活》'
+          },
+          {
+            year: '1910s',
+            title: '共同见证维也纳文化的黄金时代',
+            content: '两人同为维也纳文化黄金时代的亲历者与贡献者。霍夫曼斯塔尔与施特劳斯的歌剧合作，成为这个时代最重要的艺术成就之一；而茨威格则以小说和传记闻名欧洲。他们共同构成了那个已逝世界的文化图景。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          }
+        ],
+        works: [
+          {
+            year: '1911',
+            title: '玫瑰骑士',
+            type: '歌剧剧本 · 与理查德·施特劳斯合作',
+            desc: '以 18 世纪维也纳为背景的喜歌剧，探讨爱情、时间与优雅地放手。被誉为 20 世纪最伟大的歌剧之一。'
+          },
+          {
+            year: '1903',
+            title: '钱德斯勋爵的信',
+            type: '散文',
+            desc: '一封虚构的信件，探讨语言的局限性与表达的危机，被视为现代主义文学的奠基之作。'
+          },
+          {
+            year: '1911',
+            title: '每个人',
+            type: '戏剧',
+            desc: '改编自中世纪道德剧，自 1920 年起成为萨尔茨堡音乐节的固定演出剧目，至今仍在上演。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '我们一代的年轻人，面对一个这样的成就，怎能不感到既自豪又谦卑呢？一个十六岁的孩子，还穿着中学校服，竟能写出这样的东西！我们突然意识到，诗人并不只属于传说中的过去，而是可以生长在我们自己身边的。',
+            source: '——《昨日的世界·上世纪的学校》'
+          },
+          {
+            text: '一个出类拔萃的年轻人，他在自己的领域中获得成功，就永远鼓舞他周围的年轻人。对我们来说，霍夫曼斯塔尔的存在就是这样一种鼓舞——他证明了即使在这个平庸的时代，天才依然可能降临人间。',
+            source: '——《昨日的世界·上世纪的学校》'
+          }
+        ]
+      },
+      '里尔克': {
+        name: '里尔克',
+        nameEn: 'Rainer Maria Rilke',
+        role: '诗人',
+        roleEn: 'Poet',
+        birth: '1875',
+        death: '1926',
+        birthplace: '布拉格',
+        identity: '德语诗人',
+        avatar: '里',
+        image: 'images/people/rilke.jpg',
+        imageCaption: '里尔克，摄于 1900 年',
+        quote: '他绝不把还没有全部完成的东西出手。在巴黎这座最开放的城市里，他是胆怯和压抑的，隐姓埋名使他更自由。',
+        description: '里尔克是20世纪最重要的德语诗人之一。茨威格在巴黎时期与他结识，建立了终生的友谊。里尔克以其对完美的追求而闻名，他绝不会把未完成的作品公之于众。尽管在巴黎这座开放的城市，他却保持着谦逊和低调，这种隐姓埋名的状态反而给了他更大的创作自由。',
+        encounters: [
+          {
+            year: '1900s',
+            title: '巴黎时期的相遇',
+            content: '茨威格在巴黎期间与里尔克结识。里尔克对完美的追求给茨威格留下了深刻印象——他绝不会把未完成的作品公之于众。这种对艺术的严谨态度深深影响了茨威格。',
+            source: '——《昨日的世界·巴黎》'
+          }
+        ],
+        works: [
+          {
+            year: '1905',
+            title: '祈祷书',
+            type: '诗集',
+            desc: '里尔克的早期重要作品，展现了他对宗教和存在的深刻思考。'
+          },
+          {
+            year: '1910',
+            title: '马尔特手记',
+            type: '小说',
+            desc: '里尔克唯一的长篇小说，以第一人称叙述，探讨艺术、死亡和存在等主题。'
+          },
+          {
+            year: '1923',
+            title: '杜伊诺哀歌',
+            type: '诗集',
+            desc: '里尔克的巅峰之作，被誉为20世纪最重要的德语诗歌之一。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '他绝不把还没有全部完成的东西出手。在巴黎这座最开放的城市里，他是胆怯和压抑的，隐姓埋名使他更自由。',
+            source: '——《昨日的世界·巴黎》'
+          }
+        ]
+      },
+      '罗丹': {
+        name: '罗丹',
+        nameEn: 'Auguste Rodin',
+        role: '雕塑家',
+        roleEn: 'Sculptor',
+        birth: '1840',
+        death: '1917',
+        birthplace: '法国 巴黎',
+        identity: '现代雕塑之父',
+        avatar: '罗',
+        image: 'images/people/rodin.jpg',
+        imageCaption: '奥古斯特·罗丹',
+        quote: '一切伟大艺术的永恒秘密：全神贯注，每个艺术家都要忘掉自我，忘掉周围整个世界。',
+        description: '奥古斯特·罗丹是法国著名雕塑家，被誉为现代雕塑之父。茨威格在巴黎期间拜访了罗丹的工作室，亲眼目睹了艺术创作的秘密。罗丹展现给茨威格的是：一切伟大艺术的永恒秘密在于全神贯注——不仅思想要集中，而且要集中全身的精力；每个艺术家都要忘掉自我，忘掉周围整个世界。这次经历对茨威格的艺术观产生了深远影响。',
+        encounters: [
+          {
+            year: '1905',
+            title: '拜访罗丹工作室',
+            content: '茨威格在巴黎期间拜访了罗丹的工作室，亲眼目睹了艺术创作的秘密。罗丹展现给茨威格的是：一切伟大艺术的永恒秘密在于全神贯注——不仅思想要集中，而且要集中全身的精力；每个艺术家都要忘掉自我，忘掉周围整个世界。',
+            source: '——《昨日的世界·巴黎》'
+          }
+        ],
+        works: [
+          {
+            year: '1880',
+            title: '地狱之门',
+            type: '雕塑',
+            desc: '根据但丁《神曲》创作的巨型雕塑，是罗丹最重要的作品之一。'
+          },
+          {
+            year: '1889',
+            title: '加莱义民',
+            type: '雕塑',
+            desc: '纪念英法百年战争中加莱六位义民的群雕，展现了罗丹对人性的深刻理解。'
+          },
+          {
+            year: '1898',
+            title: '巴尔扎克像',
+            type: '雕塑',
+            desc: '为法国作家巴尔扎克创作的纪念像，展现了罗丹对人物性格的深刻把握。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '一切伟大艺术的永恒秘密：全神贯注，每个艺术家都要忘掉自我，忘掉周围整个世界。',
+            source: '——《昨日的世界·巴黎》'
+          },
+          {
+            text: '目睹艺术创作的秘密：全神贯注，不仅思想集中，而且要集中全身精力；每个艺术家都要忘掉自我，忘掉周围整个世界。',
+            source: '——《昨日的世界·巴黎》'
+          }
+        ]
+      },
+      '罗曼·罗兰': {
+        name: '罗曼·罗兰',
+        nameEn: 'Romain Rolland',
+        role: '作家',
+        roleEn: 'Writer',
+        birth: '1866',
+        death: '1944',
+        birthplace: '法国 克拉姆西',
+        identity: '1915年诺贝尔文学奖得主',
+        avatar: '罗',
+        image: 'images/people/rolland.jpg',
+        imageCaption: '罗曼·罗兰，摄于 1914 年',
+        quote: '最重要的精神导师之一。我和他的友谊使我受益最多，在某些时候，这种友谊甚至决定了我的人生道路。他将代表欧洲的良知。',
+        description: '罗曼·罗兰是法国作家、音乐评论家，1915年诺贝尔文学奖得主。茨威格在1913年第一次与他会面，这次会面开启了两人深厚的友谊。除了与弗洛伊德和维尔哈伦的友谊外，茨威格认为与罗曼·罗兰的友谊使他受益最多，在某些时候甚至决定了他的人生道路。罗曼·罗兰在第一次世界大战期间坚持反战立场，代表欧洲的良知，对茨威格产生了深刻的精神影响。',
+        encounters: [
+          {
+            year: '1913',
+            title: '第一次与罗曼·罗兰会面',
+            content: '茨威格在1913年第一次与罗曼·罗兰会面，这次会面开启了两人深厚的友谊。除了和弗洛伊德还有维尔哈伦的友谊外，茨威格认为与罗曼·罗兰的友谊使他受益最多，在某些时候甚至决定了他的人生道路。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          },
+          {
+            year: '1914-1918',
+            title: '一战期间的精神支持',
+            content: '第一次世界大战期间，罗曼·罗兰坚持反战立场，代表欧洲的良知。他对茨威格产生了深刻的精神影响，帮助茨威格在战争的混乱中保持理性和人道主义立场。',
+            source: '——《昨日的世界·1914年战争爆发》'
+          }
+        ],
+        works: [
+          {
+            year: '1904-1912',
+            title: '约翰·克利斯朵夫',
+            type: '长篇小说',
+            desc: '罗曼·罗兰的代表作，描写了音乐家约翰·克利斯朵夫的一生，展现了艺术家对理想的追求。'
+          },
+          {
+            year: '1915',
+            title: '超乎混战之上',
+            type: '政论',
+            desc: '一战期间的反战文章，体现了罗曼·罗兰的人道主义精神。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '除了和弗洛伊德还有维尔哈伦的友谊外，我和罗曼·罗兰的友谊使我受益最多，在某些时候，这种友谊甚至决定了我的人生道路。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          },
+          {
+            text: '他将代表欧洲的良知。在第一次世界大战期间，当所有人都陷入民族主义的狂热时，罗曼·罗兰坚持反战立场，成为那个时代少有的理性声音。',
+            source: '——《昨日的世界·1914年战争爆发》'
+          }
+        ]
+      },
+      '弗洛伊德': {
+        name: '弗洛伊德',
+        nameEn: 'Sigmund Freud',
+        role: '精神分析学家',
+        roleEn: 'Psychoanalyst',
+        birth: '1856',
+        death: '1939',
+        birthplace: '奥地利 维也纳',
+        identity: '精神分析学派创始人',
+        avatar: '弗',
+        image: 'images/people/freud.jpg',
+        imageCaption: '西格蒙德·弗洛伊德',
+        quote: '狂热地追求真理，但同时清楚地认识到任何真理都有局限性。他的死和他的生命一样，是一种道德上的伟大业绩。',
+        description: '西格蒙德·弗洛伊德是奥地利精神分析学家，精神分析学派的创始人。作为茨威格的维也纳同乡，两人在流亡伦敦期间多次见面。弗洛伊德以其对真理的狂热追求而闻名，但同时清楚地认识到任何真理都有局限性。茨威格观察到，弗洛伊德不再把痛苦和死亡看作自己的私事，而是把它们看作超越个人的观察和研究的对象。他的死和他的生命一样，是一种道德上的伟大业绩。',
+        encounters: [
+          {
+            year: '1938',
+            title: '与流亡伦敦的弗洛伊德多次见面',
+            content: '茨威格在流亡伦敦期间多次与弗洛伊德见面。他观察到，弗洛伊德不再把痛苦和死亡看作自己的私事，而是把它们看作超越个人的观察和研究的对象：他的死和他的生命一样，是一种道德上的伟大业绩。',
+            source: '——《昨日的世界·和平的濒死》'
+          }
+        ],
+        works: [
+          {
+            year: '1900',
+            title: '梦的解析',
+            type: '心理学著作',
+            desc: '弗洛伊德一生中最得意和最重要的著作，也是精神分析理论体系形成的标志。通过分析梦境揭示潜意识的心理机制。'
+          },
+          {
+            year: '1917',
+            title: '精神分析引论',
+            type: '心理学著作',
+            desc: '第一部全面系统阐述精神分析学的代表性著作，系统地介绍了精神分析的基本理论和方法。'
+          },
+          {
+            year: '1901',
+            title: '日常生活的精神病理学',
+            type: '心理学著作',
+            desc: '用动力心理学观点解释日常生活事件，如口误、笔误、遗忘等现象，揭示了潜意识在日常生活中的作用。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '他不再把痛苦和死亡看作自己的私事，而是把它们看作超越个人的观察和研究的对象：他的死和他的生命一样，是一种道德上的伟大业绩。',
+            source: '——《昨日的世界·和平的濒死》'
+          }
+        ]
+      },
+      '高尔基': {
+        name: '高尔基',
+        nameEn: 'Maxim Gorky',
+        role: '作家',
+        roleEn: 'Writer',
+        birth: '1868',
+        death: '1936',
+        birthplace: '俄罗斯 下诺夫哥罗德',
+        identity: '苏联作家、社会主义现实主义文学奠基人',
+        avatar: '高',
+        image: 'images/people/gorky.jpg',
+        imageCaption: '马克西姆·高尔基',
+        quote: '我们两人只有默默地相对而坐，因为他不会任何外语，我也不会俄语。但语言不通却并不妨碍友谊。',
+        description: '马克西姆·高尔基是苏联著名作家，社会主义现实主义文学的奠基人。茨威格在访问苏联时与他结识，后来在意大利的索伦托再次重逢。有趣的是，他们两人只有默默地相对而坐，因为高尔基不会任何外语，茨威格也不会俄语。但语言不通却并不妨碍他们之间建立深厚的友谊，这证明了真正的友谊可以超越语言的障碍。',
+        encounters: [
+          {
+            year: '1920s',
+            title: '苏联访问时结识',
+            content: '茨威格在访问苏联时与高尔基结识。虽然语言不通，但两人建立了深厚的友谊。',
+            source: '——《昨日的世界》'
+          },
+          {
+            year: '1920s-1930s',
+            title: '在索伦托再次重逢',
+            content: '茨威格在意大利的索伦托再次与高尔基重逢。他们两人只有默默地相对而坐，因为高尔基不会任何外语，茨威格也不会俄语。但语言不通却并不妨碍友谊。',
+            source: '——《昨日的世界》'
+          }
+        ],
+        works: [
+          {
+            year: '1902',
+            title: '底层',
+            type: '戏剧',
+            desc: '高尔基的代表作之一，深刻描绘了底层人民的生活状态。'
+          },
+          {
+            year: '1906',
+            title: '母亲',
+            type: '小说',
+            desc: '社会主义现实主义文学的经典作品，描写了工人阶级的觉醒。'
+          },
+          {
+            year: '1925-1936',
+            title: '克里姆·萨姆金的一生',
+            type: '长篇小说',
+            desc: '高尔基的未完成长篇巨著，展现了俄罗斯知识分子的命运。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '我们两人只有默默地相对而坐，因为他不会任何外语，我也不会俄语。但语言不通却并不妨碍友谊。',
+            source: '——《昨日的世界》'
+          }
+        ]
+      },
+      '赫茨尔': {
+        name: '赫茨尔',
+        nameEn: 'Theodor Herzl',
+        role: '犹太复国主义创始人',
+        roleEn: 'Founder of Zionism',
+        birth: '1860',
+        death: '1904',
+        birthplace: '匈牙利 布达佩斯',
+        identity: '现代以色列国的精神之父',
+        avatar: '赫',
+        image: 'images/people/herzl.jpg',
+        imageCaption: '西奥多·赫茨尔',
+        quote: '我有生以来遇到的第一个具有世界历史地位的人物。他的死引起千百万人民内心里巨大的悲痛，使我第一次感受到，一个孤独的人，他的思想威力给世界留下了多么大的激情和希望。',
+        description: '西奥多·赫茨尔是犹太复国主义运动的创始人，被誉为现代以色列国的精神之父。茨威格在维也纳大学期间第一次见到他，称他是自己有生以来遇到的第一个具有世界历史地位的人物。赫茨尔的死引起千百万人民内心里巨大的悲痛，使茨威格第一次感受到，一个孤独的人，他的思想威力给世界留下了多么大的激情和希望。',
+        encounters: [
+          {
+            year: '1901',
+            title: '第一次见赫茨尔',
+            content: '茨威格在维也纳大学期间第一次见到赫茨尔，称他是自己有生以来遇到的第一个具有世界历史地位的人物。赫茨尔的死引起千百万人民内心里巨大的悲痛，使茨威格第一次感受到，一个孤独的人，他的思想威力给世界留下了多么大的激情和希望。',
+            source: '——《昨日的世界·大学生活》'
+          }
+        ],
+        works: [
+          {
+            year: '1896',
+            title: '犹太国',
+            type: '政治著作',
+            desc: '犹太复国主义运动的纲领性文件，提出了建立犹太国家的构想。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '我有生以来遇到的第一个具有世界历史地位的人物。他的死引起千百万人民内心里巨大的悲痛，使我第一次感受到，一个孤独的人，他的思想威力给世界留下了多么大的激情和希望。',
+            source: '——《昨日的世界·大学生活》'
+          }
+        ]
+      },
+      '施特劳斯': {
+        name: '施特劳斯',
+        nameEn: 'Richard Strauss',
+        role: '作曲家',
+        roleEn: 'Composer',
+        birth: '1864',
+        death: '1949',
+        birthplace: '德国 慕尼黑',
+        identity: '德国晚期浪漫主义作曲家',
+        avatar: '施',
+        image: 'images/people/strauss.jpg',
+        imageCaption: '理查德·施特劳斯',
+        quote: '与贝多芬齐名的在世最伟大作曲家之一。他评判自己的作品是这么客观，好像是别人创作的。',
+        description: '理查德·施特劳斯是德国晚期浪漫主义作曲家，与贝多芬齐名的在世最伟大作曲家之一。茨威格曾与他合作创作歌剧。然而，施特劳斯接受了纳粹的国家音乐局总监任命，这一决定在茨威格看来是一种妥协。茨威格注意到，施特劳斯评判自己的作品是如此客观，好像是别人创作的一样。施特劳斯与霍夫曼斯塔尔的歌剧合作，成为维也纳文化黄金时代最重要的艺术成就之一。',
+        encounters: [
+          {
+            year: '1910s',
+            title: '通过霍夫曼斯塔尔了解施特劳斯',
+            content: '茨威格通过霍夫曼斯塔尔了解到施特劳斯的音乐创作。施特劳斯与霍夫曼斯塔尔的歌剧合作，成为维也纳文化黄金时代最重要的艺术成就之一。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          },
+          {
+            year: '1930s',
+            title: '对施特劳斯接受纳粹任命的观察',
+            content: '施特劳斯接受了纳粹的国家音乐局总监任命，这一决定在茨威格看来是一种妥协。茨威格注意到，施特劳斯评判自己的作品是如此客观，好像是别人创作的一样。',
+            source: '——《昨日的世界》'
+          }
+        ],
+        works: [
+          {
+            year: '1911',
+            title: '玫瑰骑士',
+            type: '歌剧 · 与霍夫曼斯塔尔合作',
+            desc: '以18世纪维也纳为背景的喜歌剧，探讨爱情、时间与优雅地放手。被誉为20世纪最伟大的歌剧之一。'
+          },
+          {
+            year: '1909',
+            title: '埃莱克特拉',
+            type: '歌剧 · 与霍夫曼斯塔尔合作',
+            desc: '根据索福克勒斯的悲剧改编，展现了现代主义音乐的表现力。'
+          },
+          {
+            year: '1896',
+            title: '查拉图斯特拉如是说',
+            type: '交响诗',
+            desc: '根据尼采同名哲学著作创作的交响诗，展现了施特劳斯对哲学思想的音乐诠释。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '与贝多芬齐名的在世最伟大作曲家之一。他评判自己的作品是这么客观，好像是别人创作的。',
+            source: '——《昨日的世界》'
+          }
+        ]
+      },
+      '维尔哈伦': {
+        name: '维尔哈伦',
+        nameEn: 'Emile Verhaeren',
+        role: '诗人',
+        roleEn: 'Poet',
+        birth: '1855',
+        death: '1916',
+        birthplace: '比利时',
+        identity: '比利时象征主义诗人',
+        avatar: '维',
+        image: 'images/people/verhaeren.jpg',
+        imageCaption: '埃米尔·维尔哈伦',
+        quote: '早年导师，陪同德国讲演，德法和解的象征。他的本性是稳健的，从不自满。他认为，自己的朋友和他们忠实的友情就已让他心满意足。',
+        description: '埃米尔·维尔哈伦是比利时法语诗人，茨威格早年的导师之一。茨威格曾陪同他在德国进行讲演，维尔哈伦成为德法和解的象征。他的本性是稳健的，从不自满。他认为，自己的朋友和他们忠实的友情就已让他心满意足。除了与弗洛伊德和罗曼·罗兰的友谊外，茨威格与维尔哈伦的友谊也使他受益良多。',
+        encounters: [
+          {
+            year: '1900s',
+            title: '早年导师',
+            content: '维尔哈伦是茨威格早年的导师之一。他的本性是稳健的，从不自满。他认为，自己的朋友和他们忠实的友情就已让他心满意足。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          },
+          {
+            year: '1900s',
+            title: '陪同德国讲演',
+            content: '茨威格曾陪同维尔哈伦在德国进行讲演，维尔哈伦成为德法和解的象征。这次经历加深了两人之间的友谊。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          }
+        ],
+        works: [
+          {
+            year: '1893',
+            title: '触手般扩展的城市',
+            type: '诗集',
+            desc: '描绘现代工业城市的诗集，展现了维尔哈伦对现代文明的深刻思考。'
+          },
+          {
+            year: '1895',
+            title: '幻想的村庄',
+            type: '诗集',
+            desc: '反映工业化对乡村生活影响的诗集。'
+          },
+          {
+            year: '1898',
+            title: '生活的面貌',
+            type: '诗集',
+            desc: '维尔哈伦的重要诗集，展现了他对现代生活的深刻洞察。'
+          }
+        ],
+        bookQuotes: [
+          {
+            text: '除了和弗洛伊德还有维尔哈伦的友谊外，我和罗曼·罗兰的友谊使我受益最多，在某些时候，这种友谊甚至决定了我的人生道路。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          },
+          {
+            text: '早年导师，陪同德国讲演，德法和解的象征。他的本性是稳健的，从不自满。他认为，自己的朋友和他们忠实的友情就已让他心满意足。',
+            source: '——《昨日的世界·欧洲的光彩》'
+          }
+        ]
+      }
+    };
+
+    // 从 URL 参数获取人物名称
+    function getPersonFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const personName = urlParams.get('person');
+      return personName ? decodeURIComponent(personName) : null;
+    }
+
+    // 渲染人物详情
+    function renderPersonDetail(person) {
+      if (!person) {
+        // 如果没有找到人物，显示默认的霍夫曼斯塔尔
+        renderPersonDetail(personData['霍夫曼斯塔尔']);
+        return;
+      }
+
+      // 更新页面标题
+      document.title = `${person.name} | 人物图谱 | 昨日的世界`;
+
+      // 更新 Hero 部分
+      const heroImage = document.querySelector('.hero-image img');
+      const heroImageCaption = document.querySelector('.hero-image-caption');
+      const heroEyebrow = document.querySelector('.hero-eyebrow');
+      const heroName = document.querySelector('.hero-name');
+      const heroNameEn = document.querySelector('.hero-name-en');
+      const heroMeta = document.querySelector('.hero-meta');
+      const heroQuote = document.querySelector('.hero-quote');
+      const heroDesc = document.querySelector('.hero-desc');
+
+      if (heroImage) heroImage.src = person.image || '';
+      if (heroImage) heroImage.alt = person.name;
+      if (heroImageCaption) heroImageCaption.textContent = person.imageCaption || '';
+      if (heroEyebrow) heroEyebrow.textContent = person.role || '';
+      if (heroName) heroName.textContent = person.name;
+      if (heroNameEn) heroNameEn.textContent = person.nameEn || '';
+      if (heroQuote) heroQuote.textContent = person.quote || '';
+      if (heroDesc) heroDesc.textContent = person.description || '';
+
+      // 更新 Meta 信息
+      if (heroMeta) {
+        heroMeta.innerHTML = `
+          <div class="meta-item">
+            <span class="meta-label">生卒</span>
+            <span class="meta-value">${person.birth || '?'} — ${person.death || '?'}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">出生地</span>
+            <span class="meta-value">${person.birthplace || '未知'}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">身份</span>
+            <span class="meta-value">${person.identity || person.role || ''}</span>
+          </div>
+        `;
+      }
+
+      // 更新交集部分
+      const encountersContainer = document.querySelector('.encounters');
+      if (encountersContainer && person.encounters && person.encounters.length > 0) {
+        encountersContainer.innerHTML = person.encounters.map(encounter => `
+          <div class="encounter-item">
+            <div class="encounter-year">${encounter.year}</div>
+            <div class="encounter-content">
+              <h4>${encounter.title}</h4>
+              <p>${encounter.content}</p>
+              <p class="encounter-source">${encounter.source || ''}</p>
+            </div>
+          </div>
+        `).join('');
+      } else if (encountersContainer) {
+        encountersContainer.innerHTML = '<p style="color: var(--text-tertiary);">暂无交集记录</p>';
+      }
+
+      // 更新作品部分
+      const worksContainer = document.querySelector('.works-grid');
+      if (worksContainer && person.works && person.works.length > 0) {
+        worksContainer.innerHTML = person.works.map(work => `
+          <div class="work-card">
+            <div class="work-year">${work.year}</div>
+            <h3 class="work-title">${work.title}</h3>
+            <p class="work-type">${work.type}</p>
+            <p class="work-desc">${work.desc}</p>
+          </div>
+        `).join('');
+      } else if (worksContainer) {
+        worksContainer.innerHTML = '<p style="color: var(--text-tertiary); grid-column: 1 / -1;">暂无代表作品记录</p>';
+      }
+
+      // 更新书中原文部分
+      const quotesContainer = document.querySelector('.book-quotes');
+      if (quotesContainer && person.bookQuotes && person.bookQuotes.length > 0) {
+        quotesContainer.innerHTML = person.bookQuotes.map(quote => `
+          <div class="book-quote-card">
+            <span class="material-symbols-rounded book-quote-icon">format_quote</span>
+            <p class="book-quote-text">${quote.text}</p>
+            <p class="book-quote-source">${quote.source || ''}</p>
+          </div>
+        `).join('');
+      } else if (quotesContainer) {
+        quotesContainer.innerHTML = '<p style="color: var(--text-tertiary);">暂无相关引用</p>';
+      }
+
+      // 更新其他人物导航中的激活状态
+      const miniCards = document.querySelectorAll('.person-mini-card');
+      miniCards.forEach(card => {
+        const name = card.querySelector('.person-mini-name')?.textContent.trim();
+        if (name === person.name) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+        // 所有卡片均可点击跳转（含当前激活卡片）
+        card.onclick = () => {
+          window.location.href = `people-magazine.html?person=${encodeURIComponent(name)}`;
+        };
+      });
+    }
+
+    // 人物名称映射（处理不同的名称格式）
+    const personNameMap = {
+      '弗洛伊德': '弗洛伊德',
+      '西格蒙德·弗洛伊德': '弗洛伊德',
+      'Sigmund Freud': '弗洛伊德',
+      '高尔基': '高尔基',
+      'Maxim Gorky': '高尔基',
+      '赫茨尔': '赫茨尔',
+      '西奥多·赫茨尔': '赫茨尔',
+      'Theodor Herzl': '赫茨尔',
+      '霍夫曼斯塔尔': '霍夫曼斯塔尔',
+      'Hugo von Hofmannsthal': '霍夫曼斯塔尔',
+      '里尔克': '里尔克',
+      'Rainer Maria Rilke': '里尔克',
+      '罗丹': '罗丹',
+      'Auguste Rodin': '罗丹',
+      '罗曼·罗兰': '罗曼·罗兰',
+      'Romain Rolland': '罗曼·罗兰',
+      '施特劳斯': '施特劳斯',
+      'Richard Strauss': '施特劳斯',
+      '维尔哈伦': '维尔哈伦',
+      'Emile Verhaeren': '维尔哈伦'
+    };
+
+    // 页面加载时执行
+    document.addEventListener('DOMContentLoaded', () => {
+      const personName = getPersonFromURL();
+      // 使用映射表查找正确的人物名称
+      const mappedName = personName ? (personNameMap[personName] || personName) : '霍夫曼斯塔尔';
+      const person = personData[mappedName] || personData['霍夫曼斯塔尔'];
+      renderPersonDetail(person);
+      
+      // 添加页面翻书动画效果
+      const body = document.body;
+      body.classList.add('page-loading');
+      
+      // 等待内容渲染完成后执行动画
+      setTimeout(() => {
+        const heroImage = document.querySelector('.hero-image img');
+        const sections = document.querySelectorAll('.hero, .encounters, .works, .book-quotes, .people-nav');
+        
+        // 先动画hero图片
+        if (heroImage) {
+          heroImage.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+          heroImage.style.transform = 'rotateY(0deg)';
+        }
+        
+        // 然后动画各个section
+        sections.forEach((section, index) => {
+          if (section) {
+            section.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease-out';
+            section.style.transitionDelay = `${index * 0.08 + 0.1}s`;
+            section.style.transform = 'rotateY(0deg) translateX(0px)';
+            section.style.opacity = '1';
+          }
+        });
+        
+        // 动画完成后移除loading类和样式
+        setTimeout(() => {
+          body.classList.remove('page-loading');
+          sections.forEach(section => {
+            if (section) {
+              section.style.transition = '';
+              section.style.transitionDelay = '';
+              section.style.transform = '';
+              section.style.opacity = '';
+            }
+          });
+          if (heroImage) {
+            heroImage.style.transition = '';
+            heroImage.style.transform = '';
+          }
+        }, 1200);
+      }, 50);
+      
+      // 点击"查看全部"链接跳转到人物图谱页面
+      const peopleNavLink = document.querySelector('body > section.people-nav > div.people-nav-header > a');
+      if (peopleNavLink) {
+        peopleNavLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'index.html?view=people';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D image scroll reveal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <section class="loop-images" style="--bg: white;">
+	<div class="carousel-track" style="--time: 60s; --total: 9;">
+		<div class="carousel-item" style="--i: 1;" data-href="./people-magazine.html?person=弗洛伊德">
+			<img src="images/people/freud.jpg" alt="Freud">
+			<div class="person-info">
+				<span class="person-eyebrow">精神分析学家</span>
+				<span class="person-name">弗洛伊德</span>
+				<span class="person-name-en">Sigmund Freud</span>
+				<span class="person-meta">1856 — 1939</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 2;" data-href="./people-magazine.html?person=高尔基">
+			<img src="images/people/gorky.jpg" alt="Gorky">
+			<div class="person-info">
+				<span class="person-eyebrow">作家</span>
+				<span class="person-name">高尔基</span>
+				<span class="person-name-en">Maxim Gorky</span>
+				<span class="person-meta">1868 — 1936</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 3;" data-href="./people-magazine.html?person=赫茨尔">
+			<img src="images/people/herzl.jpg" alt="Herzl">
+			<div class="person-info">
+				<span class="person-eyebrow">犹太复国主义创始人</span>
+				<span class="person-name">赫茨尔</span>
+				<span class="person-name-en">Theodor Herzl</span>
+				<span class="person-meta">1860 — 1904</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 4;" data-href="./people-magazine.html?person=霍夫曼斯塔尔">
+			<img src="images/people/hofmannsthal.jpg" alt="Hofmannsthal">
+			<div class="person-info">
+				<span class="person-eyebrow">诗人 · 剧作家</span>
+				<span class="person-name">霍夫曼斯塔尔</span>
+				<span class="person-name-en">Hugo von Hofmannsthal</span>
+				<span class="person-meta">1874 — 1929</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 5;" data-href="./people-magazine.html?person=里尔克">
+			<img src="images/people/rilke.jpg" alt="Rilke">
+			<div class="person-info">
+				<span class="person-eyebrow">诗人</span>
+				<span class="person-name">里尔克</span>
+				<span class="person-name-en">Rainer Maria Rilke</span>
+				<span class="person-meta">1875 — 1926</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 6;" data-href="./people-magazine.html?person=罗丹">
+			<img src="images/people/rodin.jpg" alt="Rodin">
+			<div class="person-info">
+				<span class="person-eyebrow">雕塑家</span>
+				<span class="person-name">罗丹</span>
+				<span class="person-name-en">Auguste Rodin</span>
+				<span class="person-meta">1840 — 1917</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 7;" data-href="./people-magazine.html?person=罗曼·罗兰">
+			<img src="images/people/rolland.jpg" alt="Rolland">
+			<div class="person-info">
+				<span class="person-eyebrow">作家</span>
+				<span class="person-name">罗曼·罗兰</span>
+				<span class="person-name-en">Romain Rolland</span>
+				<span class="person-meta">1866 — 1944</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 8;" data-href="./people-magazine.html?person=施特劳斯">
+			<img src="images/people/strauss.jpg" alt="Strauss">
+			<div class="person-info">
+				<span class="person-eyebrow">作曲家</span>
+				<span class="person-name">施特劳斯</span>
+				<span class="person-name-en">Richard Strauss</span>
+				<span class="person-meta">1864 — 1949</span>
+			</div>
+		</div>
+		<div class="carousel-item" style="--i: 9;" data-href="./people-magazine.html?person=维尔哈伦">
+			<img src="images/people/verhaeren.jpg" alt="Verhaeren">
+			<div class="person-info">
+				<span class="person-eyebrow">诗人</span>
+				<span class="person-name">维尔哈伦</span>
+				<span class="person-name-en">Emile Verhaeren</span>
+				<span class="person-meta">1855 — 1916</span>
+			</div>
+		</div>
+	</div>
+	<span class="scroll-down">Scroll down <span class="arrow">↓</span></span>
+</section>
+<section class="section2" style="--bg: black;">
+	<div class="image-motion">
+		<picture>
+			<img src="https://i.postimg.cc/1ztkf4hX/moveimage.png" alt="image">
+		</picture>
+	</div>
+</section>
+<section style="--bg: black;" class="section3">
+	<div class="container">
+		<h1 class="title">《昨日的世界》</h1>
+		<!-- 搜索框：常驻 h1 下方 -->
+		<div class="search-wrapper" id="searchWrapper">
+			<div class="inline-search" id="inlineSearch">
+				<span class="material-symbols-rounded inline-search-icon">search</span>
+				<input class="inline-search-input" id="inlineSearchInput" type="text" placeholder="搜索书页、金句、标签..." autocomplete="off" />
+				<button class="inline-search-clear" id="inlineSearchClear" aria-label="清除">
+					<span class="material-symbols-rounded">close</span>
+				</button>
+			</div>
+			<!-- 搜索下拉面板 -->
+			<div class="search-dropdown" id="searchDropdown">
+				<div class="search-recent" id="searchRecent">
+					<div class="search-section-title">最近搜索</div>
+					<div class="search-recent-tags" id="searchRecentTags"></div>
+				</div>
+				<div class="search-results" id="searchResults"></div>
+			</div>
+		</div>
+		<!-- 搜索背景遮罩 -->
+		<div class="search-backdrop" id="searchBackdrop"></div>
+		<div class="text-content">
+			<div class="quote-card">
+				<p class="quote-card-text">读《昨日的世界》的时候，我一直有种很复杂的感觉。它不是那种情绪外放的书，反而很克制，但越克制越让人难受。<br><br>这是 斯蒂芬·茨威格 在流亡时期写下的回忆录。他写的不是宏大历史，而是他"曾经以为理所当然"的生活：稳定的社会秩序、自由流动的文化、对理性和进步的笃信。那种笃定感让我很羡慕——原来真的存在过一个，人们普遍相信世界会越来越好的时代。<br><br>他笔下的欧洲，是一个文化高度繁荣、思想彼此尊重的共同体。艺术家、作家、知识分子跨越国界交流，人们把教育和修养当成理所当然的底色。但战争来了之后，一切迅速坍塌。民族主义、仇恨、通货膨胀、流亡……那些曾经坚固的结构，在极端情绪面前脆弱得惊人。<br><br>我读到这里，其实想到的不是历史，而是结构。一个文明、一套价值观，看起来很稳，其实可能只是阶段性的平衡。人们习惯了安全，就会误以为那是常态。直到它消失。<br><br>茨威格没有愤怒控诉，他只是不断回望。他怀念的不是权力或荣耀，而是那种开放、理性、彼此尊重的精神氛围。这种怀念反而更沉重，因为它意味着，那些东西真的已经回不去了。</p>
+			</div>
+		</div>
+		<div class="features" id="featuresNav">
+			<div class="feature-indicator" id="featureIndicator" aria-hidden="true"></div>
+			<div class="feature active" data-feature="timeline">
+				<span class="material-symbols-rounded feature-icon">timeline</span>
+				<span class="feature-text">时间轴</span>
+			</div>
+			<div class="feature" data-feature="quotes">
+				<span class="material-symbols-rounded feature-icon">format_quote</span>
+				<span class="feature-text">金句</span>
+			</div>
+			<div class="feature" data-feature="thoughts">
+				<span class="material-symbols-rounded feature-icon">lightbulb</span>
+				<span class="feature-text">我的想法</span>
+			</div>
+		</div>
+
+		<!-- 切换内容区域 -->
+		<div class="switchable-content">
+			<!-- 时间轴内容面板 -->
+			<div class="content-panel active" data-content="timeline">
+				<div class="content-card">
+					<div class="content-header">
+						<h3 class="content-title">时代变迁</h3>
+						<span class="content-count">35</span>
+					</div>
+					<div class="content-body">
+						<!-- 童年与太平世界 -->
+						<div class="timeline-era-section">
+							<h4 class="timeline-era-title">童年与太平世界 (1881-1900)</h4>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1881</span>
+									<h3 class="timeline-card-title">茨威格出生于维也纳</h3>
+								</div>
+								<p class="timeline-quote">出生于富裕的犹太工业家家庭，父亲是成功的纺织业商人。维也纳正处于哈布斯堡王朝的黄金时代。</p>
+								<span class="timeline-tag timeline-tag-era">太平世界</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1880s</span>
+									<h3 class="timeline-card-title">"太平世界"——保险业的黄金时代</h3>
+								</div>
+								<p class="timeline-quote">出生于富裕的犹太工业家家庭，父亲是成功的纺织业商人。维也纳正处于哈布斯堡王朝的黄金时代。</p>
+								<span class="timeline-tag timeline-tag-era">太平世界</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1890s</span>
+									<h3 class="timeline-card-title">维也纳文化巅峰：七位音乐大师汇聚</h3>
+								</div>
+								<p class="timeline-quote">格鲁克、海顿、莫扎特、贝多芬、舒伯特、勃拉姆斯、约翰·施特劳斯，都在维也纳生活过，从这里向全世界发出耀眼的光芒。</p>
+								<span class="timeline-tag timeline-tag-era">太平世界</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1890s</span>
+									<h3 class="timeline-card-title">中学八年"牢房"生活</h3>
+										</div>
+										<p class="timeline-quote">十三年的硬板凳，每天坐五至六小时。学校的使命与其说是引导我们前进，毋宁说是阻止我们向前。</p>
+										<span class="timeline-tag timeline-tag-era">上世纪的学校</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1896</span>
+									<h3 class="timeline-card-title">第一次见到霍夫曼斯塔尔</h3>
+										</div>
+										<p class="timeline-quote">16岁的天才诗人，一个中学生竟会创造出这样美的艺术，有这样的远见，思想这么深刻。他的存在本身就清楚地表明，在我们这个时代同样可以产生诗人。</p>
+										<span class="timeline-tag timeline-tag-era">上世纪的学校</span>
+							</div>
+						</div>
+
+						<!-- 求学与漫游 -->
+						<div class="timeline-era-section">
+							<h4 class="timeline-era-title">求学与漫游 (1900-1914)</h4>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1900</span>
+									<h3 class="timeline-card-title">进入维也纳大学</h3>
+										</div>
+										<p class="timeline-quote">选择哲学专业，实际上是为了有最大限度的时间和自由来研究文学和艺术。头三年的大学课程根本不用去管！</p>
+										<span class="timeline-tag timeline-tag-era">大学生活</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1901</span>
+									<h3 class="timeline-card-title">第一次见赫茨尔</h3>
+										</div>
+										<p class="timeline-quote">他是我有生以来遇到的第一个具有世界历史地位的人物。犹太复国主义的萌芽。</p>
+										<span class="timeline-tag timeline-tag-era">大学生活</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1904</span>
+									<h3 class="timeline-card-title">开启巴黎岁月</h3>
+										</div>
+										<p class="timeline-quote">在皇家宫殿附近租房。在巴黎，有谁关心民族、阶级和出身呢？我把它看作我的第二故乡。</p>
+										<span class="timeline-tag timeline-tag-era timeline-tag-pinned">巴黎</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1905</span>
+									<h3 class="timeline-card-title">拜访罗丹工作室</h3>
+										</div>
+										<p class="timeline-quote">目睹艺术创作的秘密：全神贯注，不仅思想集中，而且要集中全身精力；每个艺术家都要忘掉自我，忘掉周围整个世界。</p>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1913</span>
+									<h3 class="timeline-card-title">第一次与罗曼·罗兰会面</h3>
+										</div>
+										<p class="timeline-quote">除了我和弗洛伊德还有维尔哈伦的友谊外，我和罗曼·罗兰的友谊使我受益最多，在某些时候，这种友谊甚至决定了我的人生道路。</p>
+										<span class="timeline-tag timeline-tag-era">欧洲的光彩</span>
+							</div>
+						</div>
+
+						<!-- 战争与动荡 -->
+						<div class="timeline-era-section">
+							<h4 class="timeline-era-title">战争与动荡 (1914-1933)</h4>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1914.6.28</span>
+									<h3 class="timeline-card-title">萨拉热窝刺杀事件</h3>
+										</div>
+										<p class="timeline-quote">一切又恢复常态，该谈天的谈天，该欢笑的欢笑。人们并不知道，这声枪响将改变整个世界。</p>
+										<span class="timeline-tag timeline-tag-disillusion">1914年战争爆发</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1914.8</span>
+									<h3 class="timeline-card-title">一战爆发，举国狂热</h3>
+										</div>
+										<p class="timeline-quote">在老百姓看来，战争不过是一次浪漫色彩的短暂郊游。年轻人生怕错过一生中绝妙的机会，急急忙忙跑去报名参军。</p>
+										<span class="timeline-tag timeline-tag-atrocity">1914年战争爆发</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1918.11</span>
+									<h3 class="timeline-card-title">目睹哈布斯堡皇朝最后的皇帝离开</h3>
+										</div>
+										<p class="timeline-quote">延续了近千年的皇朝在这一瞬间宣告真正结束。我知道，我要回去的地方已是另一个奥地利，另一个世界。</p>
+										<span class="timeline-tag timeline-tag-disillusion">重返奥地利</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1922</span>
+									<h3 class="timeline-card-title">拉特瑙被暗杀，德国马克崩溃</h3>
+										</div>
+										<p class="timeline-quote">早上用五万马克买一张报纸，晚上就要用十万马克。当时买一根鞋带用的钱，在过去可以买一间有两千双鞋子的豪华鞋店。</p>
+										<span class="timeline-tag timeline-tag-atrocity">又回到世界上</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1933.1</span>
+									<h3 class="timeline-card-title">希特勒上台</h3>
+										</div>
+										<p class="timeline-quote">国会纵火案发生了，国会消失了，戈林撒出了他的暴徒，霎时间，德国的一切法律化为乌有。</p>
+										<span class="timeline-tag timeline-tag-atrocity">希特勒的崛起</span>
+							</div>
+						</div>
+
+						<!-- 流亡与告别 -->
+						<div class="timeline-era-section">
+							<h4 class="timeline-era-title">流亡与告别 (1934-1942)</h4>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1934.2</span>
+									<h3 class="timeline-card-title">萨尔茨堡家中被搜查</h3>
+										</div>
+										<p class="timeline-quote">四名便衣警察搜查我家里的"武器"。人世间最重要的是个人的自由。我决定放弃我的住宅，离开奥地利。</p>
+										<span class="timeline-tag timeline-tag-disillusion">希特勒的崛起</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1937 秋</span>
+									<h3 class="timeline-card-title">最后一次回维也纳看望母亲</h3>
+										</div>
+										<p class="timeline-quote">我拥抱我母亲时，怀着这种暗藏的"这是最后一次了"的感觉。我对这座城市的一切，对这个国家的一切都怀着"永别"的情感。</p>
+										<span class="timeline-tag timeline-tag-disillusion">和平的濒死</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1938.3.13</span>
+									<h3 class="timeline-card-title">奥地利沦陷</h3>
+										</div>
+										<p class="timeline-quote">大学教授被迫用赤裸的双手去擦洗马路；虔诚的白胡子犹太人被拖进寺庙，狂吼乱叫的年轻人逼着他们跪下齐声高呼"希特勒万岁"。</p>
+										<span class="timeline-tag timeline-tag-atrocity">和平的濒死</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1938</span>
+									<h3 class="timeline-card-title">与流亡伦敦的弗洛伊德多次见面</h3>
+										</div>
+										<p class="timeline-quote">他不再把痛苦和死亡看作自己的私事，而是把它们看作超越个人的观察和研究的对象：他的死和他的生命一样，是一种道德上的伟大业绩。</p>
+										<span class="timeline-tag timeline-tag-era">和平的濒死</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1939.9.1</span>
+									<h3 class="timeline-card-title">结婚当天，二战爆发</h3>
+										</div>
+										<p class="timeline-quote">官员开始为我们填写结婚证书时，里面的房门突然被打开，一位官员大声喊道："德国人入侵波兰，战争爆发了！"</p>
+										<span class="timeline-tag timeline-tag-atrocity">和平的濒死</span>
+							</div>
+							<div class="timeline-card">
+								<div class="timeline-card-header">
+									<span class="timeline-year">1942</span>
+									<h3 class="timeline-card-title">写作《昨日的世界》</h3>
+										</div>
+										<p class="timeline-quote">每一个影子毕竟还是光明的产儿。只有经历了光明和黑暗、和平与战争、兴盛和衰败的人，才算是真正生活过。</p>
+										<span class="timeline-tag timeline-tag-era">前言</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 金句内容面板 -->
+			<div class="content-panel" data-content="quotes">
+				<div class="content-card">
+					<div class="content-header">
+						<h3 class="content-title">精选金句</h3>
+						<span class="content-count">13</span>
+					</div>
+					<div class="content-body">
+						<div class="quote-item">
+							<p class="quote-text">"那个我生长于斯的世界，和今天的世界，在我眼里日益分裂为完全不同的世界。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">前言</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"巨大的风暴把世界击得粉碎，我才完全明白，太平世界不过是梦幻中的宫殿。"</p>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"我们这一代人已经学会了对集体残暴行为的爆发不再感到惊奇。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">太平世界</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"早先，人只有一个躯体和一个灵魂，今天还得外加一个护照，不然人们不会把他当人看待。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">和平的濒死</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"人的尊严在这个世纪里丢失了多少啊！"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">和平的濒死</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"过去谈论波德莱尔的诗，现在谈论的是许可证的情况。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">和平的濒死</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"一切伟大艺术的永恒秘密：全神贯注，每个艺术家都要忘掉自我，忘掉周围整个世界。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">巴黎</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"艺术能使我们每个人得到满足，但它对现实生活却无能为力。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">欧洲的光彩</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"只有早早地学会敞开自己心扉的人，以后才能把整个世界包容在自己的心里。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">巴黎</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"人生的道路是由内因决定的；我们的道路往往偏离我们的愿望，但它终会把我们引向自己看不见的目标。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">我的崎岖道路</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"人获得这类认识，从不是通过别人的经验，而始终只能从自己的命运中获得。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">日落</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"在每个艺术家心中都隐藏着一种矛盾：生活坎坷时渴望安宁，生活安宁时反而渴望坎坷。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">日落</span>
+							</div>
+						</div>
+						<div class="quote-item">
+							<p class="quote-text">"每一个影子毕竟还是光明的产儿。只有经历了光明和黑暗、和平与战争、兴盛和衰败的人，才算是真正生活过。"</p>
+							<div class="quote-meta">
+								<span class="quote-chapter">和平的濒死</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 我的想法内容面板 -->
+			<div class="content-panel" data-content="thoughts">
+				<div class="content-card">
+					<div class="content-header">
+						<h3 class="content-title">我的想法</h3>
+						<span class="content-count">8</span>
+					</div>
+					<div class="content-body">
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">人的一生中所忘掉的一切，本就是应该忘却的，这是人的内在本能早已决定了的。唯有我自己想要记住的事，才好为别人保存下来。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2025/12/22</span>
+									</div>
+								</div>
+								<p class="thought-text">不是所有值得经历的事，都值得被记住；只有那些你愿意为他人承担的记忆，才值得留下。</p>
+								<div class="thought-topic">记忆与选择</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">那个世纪的科学还没发现，正在发育的青少年需要新鲜空气和运动。人们以为，在硬板凳上坐了四五个小时以后，只要在阴冷、狭窄的走廊上休息十分钟就足够了。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/01/16</span>
+									</div>
+								</div>
+								<p class="thought-text">竟然和 100 年前是一样🤦‍♂️</p>
+								<div class="thought-topic">教育</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">我觉得，最能说明我们和老师之间在思想上感情上毫无交往的例子就是，我早已把他们的名字和容貌忘得一干二净。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/16</span>
+									</div>
+								</div>
+								<p class="thought-text">就像离职的同事，多年以后也不会记得他们的名字和容貌，如果还能记得，说明时间还不够久。比如我确实已经不记得中学老师的姓名也容貌，同学也是。</p>
+								<div class="thought-topic">遗忘</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">纵然一个三十岁的男子，也同样被看作羽毛未丰不能独立的人；即便到了四十岁，也被认为不足以担当重任。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/16</span>
+									</div>
+								</div>
+								<p class="thought-text">话语权从来不在年轻人身上，至少目前这一代是这样的，95后00后没有。</p>
+								<div class="thought-topic">代际权力</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">纵然一个三十岁的男子，也同样被看作羽毛未丰不能独立的人；即便到了四十岁，也被认为不足以担当重任。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/16</span>
+									</div>
+								</div>
+								<p class="thought-text">现在公司企业的年轻化本质也是阶级固化，招一批小的年轻的来干活，淘汰那些中年人，核心还是年轻人好控制，通过控制年轻好控制的继续巩固自己的地位。真正的年轻化的从高层管理、中层管理、基层管理全部年轻化，让年轻人看到希望，而不是就做个耗材，一批批淘汰，巩固自己的地位。</p>
+								<div class="thought-topic">职场</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">今天我心里才明白，过去我写的一切作品和所做的一切事情，都是没有意义的；我们当年的一切抱负、忧虑、失望、怨恨，在今天看来都是微不足道的。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/18</span>
+									</div>
+								</div>
+								<p class="thought-text">正如我们现在回望已经走过的过去，一切都是微不足道，历史洪流面前，个人如此渺小。</p>
+								<div class="thought-topic">历史与个人</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">我要得到那张英国的外国人身份证，就必须提出申请。这是一种经申请得来的照顾，而且这种照顾随时都可能被收回。</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/20</span>
+									</div>
+								</div>
+								<p class="thought-text">这就是绝大多数人的申请签证的流程，填表（什么身份证，户口本，银行流水，公司证明基本这一辈子的信息都填了），排队，申请护照，等待！甚至更有甚者中国绝大多数人都没有护照。</p>
+								<div class="thought-topic">护照/自由</div>
+							</div>
+						</div>
+
+						<div class="thought-item">
+							<div class="thought-original">
+								<div class="thought-original-line"></div>
+								<p class="thought-original-text">因为所有国家都对我这个身份归属不清、没有法律保护、无国籍的人表示不信任...我不由自主地想起几年前一个流亡的俄国人同我说的话："早先，人只有一个躯体和一个灵魂，今天还得外加一个护照，不然人们不会把他当人看待。"</p>
+							</div>
+							<div class="thought-comment">
+								<div class="thought-comment-header">
+									<div class="thought-avatar">
+										<img src="images/avatar.png" alt="Tete" />
+									</div>
+									<div class="thought-meta">
+										<span class="thought-author">Tete</span>
+										<span class="thought-date">2026/02/20</span>
+									</div>
+								</div>
+								<p class="thought-text">想起布达佩斯大饭店里这个古斯塔夫和这个门童去坐这个火车的场景。没有护照和身份就不是个人啊！</p>
+								<div class="thought-topic">身份</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- 时间轴模态框 -->
+<div id="timeline-modal" class="timeline-modal">
+	<div class="timeline-modal-content">
+		<div class="timeline-header">
+			<h2 class="timeline-title">时代变迁 <span class="timeline-count">5</span></h2>
+			<button class="timeline-close" aria-label="关闭">
+				<span class="material-symbols-rounded">close</span>
+			</button>
+		</div>
+		<div class="timeline-cards">
+			<div class="timeline-card">
+				<p class="timeline-quote">那个我生长于斯的世界,和今天的世界,在我眼里日益分裂为完全不同的世界。</p>
+				
+			</div>
+			<div class="timeline-card">
+				<p class="timeline-quote">巨大的风暴把世界击得粉碎,我才完全明白,太平世界不过是梦幻中的宫殿。</p>
+				
+			</div>
+			<div class="timeline-card">
+				<p class="timeline-quote">我们这一代人已经学会了对集体残暴行为的爆发不再感到惊奇。</p>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- 原文侧拉抽屉 -->
+	<div class="book-drawer" id="bookDrawer">
+		<div class="book-drawer-header">
+			<div class="book-drawer-chapter" id="bookDrawerChapter"></div>
+			<button class="book-drawer-close" id="bookDrawerClose" aria-label="关闭">
+				<span class="material-symbols-rounded">close</span>
+			</button>
+		</div>
+		<div class="book-drawer-body" id="bookDrawerBody"></div>
+	</div>
+	<div class="book-drawer-backdrop" id="bookDrawerBackdrop"></div>
+
+    <script src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js'></script>
+<script src="./script.js"></script>
+<script src="./search.js"></script>
+
+  </body>
+  
+</html>
